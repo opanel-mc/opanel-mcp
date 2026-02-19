@@ -11,9 +11,8 @@
     "build"
   ],
   "scripts": {
-    "build": "tsc",
-    "start": "node build/index.js",
-    "dev": "npx @modelcontextprotocol/inspector npm run start"
+    "dev": "node scripts/run-inspector-dev.mjs",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -28,6 +27,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",
     "axios": "^1.13.5",
+    "dotenv": "^17.2.3",
     "zod": "^3.25.76"
   },
   "devDependencies": {
