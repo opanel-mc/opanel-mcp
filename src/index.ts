@@ -38,7 +38,8 @@ tools.forEach((tool) => server.registerTool(
             status: "error",
             error: e instanceof Error ? e.message : "Unknown error"
           }),
-        }]
+        }],
+        isError: true
       };
     }
   }
