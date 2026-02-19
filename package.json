@@ -1,0 +1,37 @@
+{
+  "name": "opanel-mcp",
+  "version": "1.0.0",
+  "description": "OPanel MCP Server for AI agents",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "opanel-mcp": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "npx @modelcontextprotocol/inspector npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opanel-mc/opanel-mcp.git"
+  },
+  "author": "NriotHrreion",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/opanel-mc/opanel-mcp/issues"
+  },
+  "homepage": "https://github.com/opanel-mc/opanel-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "axios": "^1.13.5",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "typescript": "^5.9.3"
+  }
+}
