@@ -66,7 +66,9 @@ export async function sendGetRequest<R>(route: string): Promise<APIResponse<R>> 
 }
 
 export async function sendPostRequest<R, T = any>(route: string, body?: T): Promise<APIResponse<R>> {
-  const data = body ? JSON.stringify(body) : "";
+  const data = body ? (
+    typeof body === "string" ? body : JSON.stringify(body)
+  ) : "";
   
   return (await axios.request({
     method: "post",
@@ -81,7 +83,9 @@ export async function sendPostRequest<R, T = any>(route: string, body?: T): Prom
 }
 
 export async function sendPatchRequest<R, T = any>(route: string, body?: T): Promise<APIResponse<R>> {
-  const data = body ? JSON.stringify(body) : "";
+  const data = body ? (
+    typeof body === "string" ? body : JSON.stringify(body)
+  ) : "";
   
   return (await axios.request({
     method: "patch",
@@ -96,7 +100,9 @@ export async function sendPatchRequest<R, T = any>(route: string, body?: T): Pro
 }
 
 export async function sendDeleteRequest<T = any>(route: string, body?: T): Promise<APIResponse<never>> {
-  const data = body ? JSON.stringify(body) : "";
+  const data = body ? (
+    typeof body === "string" ? body : JSON.stringify(body)
+  ) : "";
   
   return (await axios.request({
     method: "delete",
