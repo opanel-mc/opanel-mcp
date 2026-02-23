@@ -38,6 +38,10 @@ interface MonitorResponse {
   tps: number
 }
 
+interface ServerPropertiesResponse {
+  properties: string // base64
+}
+
 export const getInfo = defineTool({
   name: "get_info",
   description: "Get basic info of the Minecraft server that OPanel is running on, such as motd, port, in-game time or server system information.",
@@ -161,6 +165,38 @@ export const setMotd = defineTool({
   output: {},
   handler: async ({ motd }) => {
     await sendPostRequest("/api/info/motd", stringToBase64(motd));
+    return {};
+  }
+});
+
+export const getServerProperties = defineTool({
+  name: "get_server_properties",
+  description: "Get the content of the server.properties file of the Minecraft server.",
+  input: {},
+  output: {
+    properties: z
+      .string()
+      .describe("The content of the server.properties file, in plain text.")
+  },
+  handler: async () => {
+    const { properties } = await sendGetRequest<ServerPropertiesResponse>("/api/control/properties");
+    return {
+      properties: base64ToString(properties)
+    };
+  }
+});
+
+export const setServerProperties = defineTool({
+  name: "set_server_properties",
+  description: "Set the content of the server.properties file of the Minecraft server. This will overwrite the existing server.properties file, so be careful when using this tool.",
+  input: {
+    properties: z
+      .string()
+      .describe("The new content of the server.properties file, in plain text.")
+  },
+  output: {},
+  handler: async ({ properties }) => {
+    await sendPostRequest("/api/control/properties", stringToBase64(properties));
     return {};
   }
 });
