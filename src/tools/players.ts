@@ -72,8 +72,8 @@ export const getPlayers = defineTool({
       .describe("Whether the whitelist is enabled on the Minecraft server.")
   },
   handler: async () => {
-    const overviewRes = await sendGetRequest<PlayersOverviewResponse>("/players");
-    const listRes = await sendGetRequest<PlayersListResponse>("/players/list");
+    const overviewRes = await sendGetRequest<PlayersOverviewResponse>("/api/players");
+    const listRes = await sendGetRequest<PlayersListResponse>("/api/players/list");
     return {
       players: listRes.players.map(({ banReason, ...rest }) => ({
         ...rest,
