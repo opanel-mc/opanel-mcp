@@ -39,12 +39,12 @@ export function validateServerArg(serverArg: string): void {
 
   const isHttps = parsed.protocol === "https:";
   const isHttpLocalOnly = parsed.protocol === "http:" && (
-    parsed.hostname === "localhost" ||
-    parsed.hostname === "127.0.0.1"
+    parsed.hostname === "localhost"
+    || parsed.hostname.startsWith("192.168.")
   );
 
   if(!isHttps && !isHttpLocalOnly) {
-    throw new Error("Invalid server URL: use https, or http with localhost/127.0.0.1 only.");
+    throw new Error("Invalid server URL: use https, or http with localhost/192.168.* only.");
   }
 }
 
