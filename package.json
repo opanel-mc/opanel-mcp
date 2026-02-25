@@ -2,7 +2,7 @@
   "name": "opanel-mcp",
   "version": "0.1.0",
   "description": "OPanel MCP Server for AI agents",
-  "main": "index.js",
+  "main": "./build/index.js",
   "type": "module",
   "bin": {
     "opanel-mcp": "./build/index.js"
