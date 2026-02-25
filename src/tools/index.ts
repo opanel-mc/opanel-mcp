@@ -6,6 +6,7 @@ import * as plugins from "./plugins.js";
 import * as terminal from "./terminal.js";
 import * as logs from "./logs.js";
 import * as codeOfConduct from "./code-of-conduct.js";
+import * as tasks from "./tasks.js";
 import { ToolDef } from "./tool-definition.js";
 
 export const tools: ToolDef<any, any>[] = [
@@ -16,5 +17,6 @@ export const tools: ToolDef<any, any>[] = [
   ...Object.values(plugins),
   ...Object.values(terminal),
   ...Object.values(logs),
-  ...Object.values(codeOfConduct)
+  ...Object.values(codeOfConduct),
+  ...Object.values(tasks),
 ];

@@ -64,3 +64,27 @@ export const getPlugins = defineTool({
     };
   }
 });
+
+export const installPlugin = defineTool({
+  name: "install_plugin",
+  description: "This MCP server does not provide plugin installation. Use other tools to download plugins/mods from browser, then manually place them into the server plugins/mods folder.",
+  input: {},
+  output: {
+    supported: z
+      .boolean()
+      .describe("Whether this MCP server supports plugin installation."),
+    nextSteps: z
+      .array(z.string())
+      .describe("Manual steps the caller agent should perform to install plugins/mods.")
+  },
+  handler: async () => {
+    return {
+      supported: false,
+      nextSteps: [
+        "Download plugin/mod files from platforms like Curseforge, Modrinth, Spigotmc or Bukkit via browser or other apps",
+        "Place the downloaded files into the server plugins/mods folder.",
+        "Restart or reload the server if needed."
+      ]
+    };
+  }
+});

@@ -200,3 +200,25 @@ export const setServerProperties = defineTool({
     return {};
   }
 });
+
+export const reloadServer = defineTool({
+  name: "reload_server",
+  description: "Reload the Minecraft server. This is useful when you have made changes to the server or plugin/mod configuration files and want to apply the changes without restarting the server. Note that this may cause some temporary lag or even some bugs on the server, so it's recommended to use this tool during off-peak hours, and report any error that occurs.",
+  input: {},
+  output: {},
+  handler: async () => {
+    await sendPostRequest("/api/control/reload");
+    return {};
+  }
+});
+
+export const stopServer = defineTool({
+  name: "stop_server",
+  description: "Safely saving all states and stop the Minecraft server.",
+  input: {},
+  output: {},
+  handler: async () => {
+    await sendPostRequest("/api/control/stop");
+    return {};
+  }
+});
