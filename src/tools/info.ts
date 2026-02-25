@@ -212,6 +212,29 @@ export const reloadServer = defineTool({
   }
 });
 
+export const restartServer = defineTool({
+  name: "restart_server",
+  description: "This MCP server does not provide server restarting. Use the stop_server tool to stop the Minecraft server, then manually launch it again.",
+  input: {},
+  output: {
+    supported: z
+      .boolean()
+      .describe("Whether this MCP server supports server restarting."),
+    nextSteps: z
+      .array(z.string())
+      .describe("Manual steps the caller agent should perform to restart the server.")
+  },
+  handler: async () => {
+    return {
+      supported: false,
+      nextSteps: [
+        "Stop the Minecraft server using the stop_server tool.",
+        "Manually launch the Minecraft server again."
+      ]
+    };
+  }
+});
+
 export const stopServer = defineTool({
   name: "stop_server",
   description: "Safely saving all states and stop the Minecraft server.",

@@ -7,6 +7,7 @@ import * as terminal from "./terminal.js";
 import * as logs from "./logs.js";
 import * as codeOfConduct from "./code-of-conduct.js";
 import * as tasks from "./tasks.js";
+import * as bukkitConfig from "./bukkit-config.js";
 import { ToolDef } from "./tool-definition.js";
 
 export const tools: ToolDef<any, any>[] = [
@@ -19,4 +20,5 @@ export const tools: ToolDef<any, any>[] = [
   ...Object.values(logs),
   ...Object.values(codeOfConduct),
   ...Object.values(tasks),
+  ...Object.values(bukkitConfig),
 ];
