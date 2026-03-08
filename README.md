@@ -2,6 +2,10 @@
 
 OPanel MCP Server for AI agents
 
+<a href="https://glama.ai/mcp/servers/@opanel-mc/opanel-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@opanel-mc/opanel-mcp/badge" alt="OPanel MCP server" />
+</a>
+
 ## Description
 
 `opanel-mcp` is a MCP server for OPanel. After connecting it to an AI agent, you can manage common Minecraft server tasks with simple prompts instead of manually clicking through the panel.
