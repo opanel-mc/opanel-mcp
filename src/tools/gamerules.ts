@@ -5,7 +5,11 @@ import { sendGetRequest, sendPatchRequest } from "../helper.js";
 export const getGamerules = defineTool({
   name: "get_gamerules",
   description: "Get the current gamerules of the Minecraft server.",
-  input: {},
+  input: {
+    dimension: z
+      .enum(["overworld", "nether", "the_end"])
+      .describe("The world dimension."),
+  },
   output: {
     gamerules: z
       .record(
@@ -14,8 +18,8 @@ export const getGamerules = defineTool({
       )
       .describe("The current gamerules of the Minecraft server. The keys are the names of the gamerules, and the values are the values of the gamerules."),
   },
-  handler: async () => {
-    return await sendGetRequest<{ gamerules: Record<string, string> }>("/api/gamerules");
+  handler: async ({ dimension }) => {
+    return await sendGetRequest<{ gamerules: Record<string, string> }>(`/api/gamerules/${dimension}`);
   }
 });
 
@@ -23,6 +27,9 @@ export const setGamerule = defineTool({
   name: "set_gamerule",
   description: "Set a gamerule of the Minecraft server.",
   input: {
+    dimension: z
+      .enum(["overworld", "nether", "the_end"])
+      .describe("The world dimension."),
     key: z
       .string()
       .describe("The key of the gamerule to set."),
@@ -31,8 +38,8 @@ export const setGamerule = defineTool({
       .describe("The value to set for the gamerule.")
   },
   output: {},
-  handler: async ({ key, value }) => {
-    await sendPatchRequest(`/api/gamerules?key=${key}&value=${value}`);
+  handler: async ({ dimension, key, value }) => {
+    await sendPatchRequest(`/api/gamerules/${dimension}?key=${key}&value=${value}`);
     return {};
   }
 });
