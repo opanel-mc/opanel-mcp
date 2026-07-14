@@ -26,7 +26,9 @@ interface InfoResponse {
     arch: string
     cpuName: string
     cpuCore: number
+    cpuThread: number
     memory: number
+    jvmMemory: number
     gpus: string[]
     java: string
   }
@@ -35,7 +37,10 @@ interface InfoResponse {
 interface MonitorResponse {
   cpu: number
   memory: number
+  jvmMemory: number
   tps: number
+  networkUpload: number
+  networkDownload: number
 }
 
 interface ServerPropertiesResponse {
@@ -100,6 +105,10 @@ export const getInfo = defineTool({
         .number()
         .int()
         .describe("The number of CPU cores of the system the Minecraft server is running on."),
+      cpuThread: z
+        .number()
+        .int()
+        .describe("The number of logical CPU threads of the system the Minecraft server is running on."),
       cpuUsage: z
         .number()
         .int()
@@ -112,6 +121,19 @@ export const getInfo = defineTool({
         .number()
         .int()
         .describe("The current memory usage percentage of the Minecraft server."),
+      jvmMemory: z
+        .number()
+        .int()
+        .describe("The maximum memory available to the Java Virtual Machine (JVM) running the Minecraft server, in bytes."),
+      jvmMemoryUsage: z
+        .number()
+        .describe("The current JVM memory usage percentage of the Minecraft server."),
+      networkUpload: z
+        .number()
+        .describe("The current network upload rate of the Minecraft server, in bytes per second."),
+      networkDownload: z
+        .number()
+        .describe("The current network download rate of the Minecraft server, in bytes per second."),
       gpus: z
         .array(z.string())
         .describe("The list of GPU names of the system the Minecraft server is running on."),
@@ -144,9 +166,14 @@ export const getInfo = defineTool({
         arch: infoRes.system.arch,
         cpuName: infoRes.system.cpuName,
         cpuCore: infoRes.system.cpuCore,
+        cpuThread: infoRes.system.cpuThread,
         cpuUsage: monitorRes.cpu,
         memory: infoRes.system.memory,
         memoryUsage: monitorRes.memory,
+        jvmMemory: infoRes.system.jvmMemory,
+        jvmMemoryUsage: monitorRes.jvmMemory,
+        networkUpload: monitorRes.networkUpload,
+        networkDownload: monitorRes.networkDownload,
         gpus: infoRes.system.gpus,
         java: infoRes.system.java
       }
