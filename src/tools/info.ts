@@ -41,6 +41,8 @@ interface MonitorResponse {
   tps: number
   networkUpload: number
   networkDownload: number
+  diskRead: number
+  diskWrite: number
 }
 
 interface ServerPropertiesResponse {
@@ -134,6 +136,12 @@ export const getInfo = defineTool({
       networkDownload: z
         .number()
         .describe("The current network download rate of the Minecraft server, in bytes per second."),
+      diskRead: z
+        .number()
+        .describe("The current disk I/O read rate of the Minecraft server, in bytes per second."),
+      diskWrite: z
+        .number()
+        .describe("The current disk I/O write rate of the Minecraft server, in bytes per second."),
       gpus: z
         .array(z.string())
         .describe("The list of GPU names of the system the Minecraft server is running on."),
@@ -174,6 +182,8 @@ export const getInfo = defineTool({
         jvmMemoryUsage: monitorRes.jvmMemory,
         networkUpload: monitorRes.networkUpload,
         networkDownload: monitorRes.networkDownload,
+        diskRead: monitorRes.diskRead,
+        diskWrite: monitorRes.diskWrite,
         gpus: infoRes.system.gpus,
         java: infoRes.system.java
       }
